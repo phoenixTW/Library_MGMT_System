@@ -17,7 +17,7 @@ describe('lms_records',function(){
 			lms_records.getSearchedBooks('JAVA',function(err,topics){
 				assert.notOk(err);
 				console.log(topics);
-				assert.deepEqual(topics.book_name,expected);
+				assert.deepEqual(topics[0].book_name,expected);
 				done();
 			});
 		});

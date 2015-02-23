@@ -5,5 +5,13 @@ block content
   form(action = "userSearch" method="POST")
    input(type="text" name="name" required)
    input(type="submit" value="SEARCH" required)
-
+   div
+    if(topics)
+     table
+      tr
+       th Name Of the Book
+       th Status
+      each topic in topics
+       tr
+        td #{topic.book_name}
 
