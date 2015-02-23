@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "initDB": "sh shellCommands/deleteDB.sh && sh shellCommands/initDB.sh"
+    "initDB": "sh shellCommands/deleteDB.sh && sh shellCommands/initDB.sh",
+    "test": "mocha test/*Test.js"
   },
   "dependencies": {
     "express": "~4.9.0",
