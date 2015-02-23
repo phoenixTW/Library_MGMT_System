@@ -41,11 +41,10 @@ var _getSearchedBooks = function(name,db,onComplete){
 	var searchQry = new JsSql();
 	searchQry.select();
 	searchQry.from(["books"]);
-	searchQry.where(["book_name='"+name+"'"]);
+	searchQry.where(["book_name like '%"+name+"%'"]);
 	searchQry.ready(db,"all",onComplete);
 	searchQry.fire();
 }
-
 
 var init = function(location){
 	var operate = function(operation){
@@ -65,7 +64,8 @@ var init = function(location){
 	};
 
 	var records = {	
-		getSearchedBooks : operate(_getSearchedBooks)
+		getSearchedBooks : operate(_getSearchedBooks),
+		// canBooksReturnByUser: operate(_canBooksReturnByUser)
 	};
 	return records;
 };

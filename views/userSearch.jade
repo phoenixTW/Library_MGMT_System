@@ -17,7 +17,10 @@ block content
        td #{topic.id}
        td #{topic.book_name}
        td 
-        if(topic.available)
+        if(topic.available == 1)
          button Borrow
-        if(topic.available==0)
+        if(userId == topic.takenBy)
+         button Return
+        if(topic.available == 0 && userId != topic.takenBy)
          | Not Available
+         
