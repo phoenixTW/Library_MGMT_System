@@ -22,8 +22,9 @@ var _getUserDetails = function (id, db, onComplete) {
 	var getUserDataQry = new JsSql();
 	getUserDataQry.select(['password', 'user_type']);
 	getUserDataQry.from(["users"]);
-	getUserDataQry.where(["u_id = " + id]);
+	getUserDataQry.where(["u_id = '" + id + "'"]);
 	getUserDataQry.ready(db, "get", onComplete);
+	console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>', getUserDataQry);
 	getUserDataQry.fire();
 };
 
