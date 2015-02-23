@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= "ADMIN SEARCH"
+  form(action = "adminSearch" method="POST")
+   input(type="text" name="name" required)
+   input(type="submit" value="SEARCH" required)
