@@ -7,13 +7,28 @@ router.get('/', function(req, res) {
   res.redirect('index');
 });
 
+var loadUserFromSession = function(req, res, next) {
+  var user = req.session.userID;
+  if (user) {
+    req.user = user;
+    res.locals.user = user;
+  } else {
+    delete req.session.userID;
+  }
+  next();
+};
+
+var requireLogin = function(req, res, next) {
+  req.user ? next() : res.redirect('/');
+};
+
+router.use(loadUserFromSession);
+
 router.post('/login', function (req, res) {
 	var userInfo = req.body;
-	console.log(userInfo);
+
 	lib.getUserDetails(userInfo.user_id, function (error, data) {
-		console.log(data);
 		if(!error && (data.password == userInfo.pwd)) {
-			console.log(req.session);
 			req.session.userID = userInfo.user_id;
 			req.session.user_type = data.user_type;
 
@@ -24,8 +39,13 @@ router.post('/login', function (req, res) {
 	});
 });
 
-router.get('/dashboard/superuser', function (req, res) {
+router.get('/dashboard/superuser', requireLogin, function (req, res) {
 	res.render('superUserDash', null);
+});
+
+router.get('/logout', requireLogin, function(req, res) {
+  req.session.destroy();
+  res.redirect('/');
 });
 
 module.exports = router;

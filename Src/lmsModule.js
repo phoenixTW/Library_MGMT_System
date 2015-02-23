@@ -24,7 +24,6 @@ var _getUserDetails = function (id, db, onComplete) {
 	getUserDataQry.from(["users"]);
 	getUserDataQry.where(["u_id = '" + id + "'"]);
 	getUserDataQry.ready(db, "get", onComplete);
-	console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>', getUserDataQry);
 	getUserDataQry.fire();
 };
 
