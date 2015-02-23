@@ -4,7 +4,7 @@ var JsSql = require("./JsSql").JsSql;
 var _getSearchedBooks = function(name,db,onComplete){
 	var searchQry = new JsSql();
 	searchQry.select();
-	searchQry.from(["books"]);
+	searchQry.from(["booksStatus"]);
 	searchQry.where(["book_name like '%"+name+"%'"]);
 	searchQry.ready(db,"all",onComplete);
 	searchQry.fire();
