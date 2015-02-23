@@ -10,6 +10,14 @@ var _getSearchedBooks = function(name,db,onComplete){
 	searchQry.fire();
 }
 
+var _addBook = function (data, db, onComplete) {
+	var addQuery = new JsSql();
+	addQuery.insertInto('booksStatus').someFields(['id', 'book_name', 'available']);
+	addQuery.values([data.id, data.name, 1]);
+	addQuery.ready(db, "run", onComplete);
+	addQuery.fire();
+};
+
 var init = function(location){
 	var operate = function(operation){
 		return function(){
@@ -29,6 +37,7 @@ var init = function(location){
 
 	var records = {	
 		getSearchedBooks : operate(_getSearchedBooks),
+		addBook: operate(_addBook)
 		// canBooksReturnByUser: operate(_canBooksReturnByUser)
 	};
 	return records;

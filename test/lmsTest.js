@@ -24,8 +24,29 @@ describe('lms_records',function(){
 		it('getSearchedTopics gives the all related books which is searched',function(done){
 			lms_records.getSearchedBooks('JAVA',function(err,topics){
 				assert.notOk(err);
-				assert.deepEqual(topics, [ { id: 12345, book_name: 'JAVA', available: 1, takenBy: null },
-					{ id: 12346, book_name: 'Javascript Reference', available: 0, takenBy: 1 } ])
+				assert.deepEqual(topics, [ { id: "12345", book_name: 'JAVA', available: 1, takenBy: null },
+					{ id: "12346", book_name: 'Javascript Reference', available: 0, takenBy: 1 } ])
+				done();
+			});
+		});
+	});
+
+	describe('#addBook', function() {
+		it('should add a book and make the availablity 1', function (done) {
+			lms_records.addBook({name: "RAFA", id:"12247"}, function(err){
+				assert.notOk(err);
+
+				lms_records.getSearchedBooks('RAFA',function(err,topics){
+					assert.notOk(err);
+					assert.deepEqual(topics, [ { id: "12247", book_name: 'RAFA', available: 1, takenBy: null }]);
+					done();
+				});
+			});
+		});
+
+		it('should give error when ID is duplicated', function (done) {
+			lms_records.addBook({name: "RAFA", id:"12347"}, function(err){
+				assert.ok(err);
 				done();
 			});
 		});
