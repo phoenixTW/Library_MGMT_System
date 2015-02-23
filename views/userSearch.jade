@@ -14,4 +14,8 @@ block content
       each topic in topics
        tr
         td #{topic.book_name}
-
+        td 
+         if(topic.available)
+          | Available
+         if(topic.available==0)
+          | Not Available
