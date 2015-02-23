@@ -38,7 +38,8 @@ router.get('/addBook', function (req, res) {
 router.post('/addBook', function (req, res) {
 	var data = {id: req.body.id, name: req.body.name};
 	lib.addBook(data, function (err, data){
-		res.redirect('addBook');
+		if(err) res.render('addBook',{message: "Invalid book ID"}); 
+		res.render('addBook',{message: "Book added successfully"}); 
 	});
 });
 
