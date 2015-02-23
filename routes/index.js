@@ -13,7 +13,6 @@ router.get('/userSearch', function(req, res) {
 router.post('/userSearch', function(req, res) {
 	var book = req.body.name;
  	lib.getSearchedBooks(book,function(err,topics){
- 		console.log("---->",topics)
 	  	res.render('userSearch',{topics:topics});
   });
 });

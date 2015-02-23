@@ -1,4 +1,6 @@
 var sqlite3 = require("sqlite3").verbose();
+var JsSql = require("./JsSql").JsSql;
+
 
 var insertQueryMaker = function (tableName, data, fields) {
 	var columns = fields && ' (' + fields.join(', ') + ')' || '';
@@ -36,15 +38,12 @@ var retrieveWhereToGet = function (resource) {
 };
 
 var _getSearchedBooks = function(name,db,onComplete){
-	console.log("Name ", name)
-	var searchQuery = "select * from books where book_name = '"+name+"'";
-	console.log(searchQuery)
-	db.all(searchQuery,	function(err,searchedBooks){
-		if(err)
-			onComplete(err,null);
-		else
-			onComplete(null,searchedBooks);
-	});
+	var searchQry = new JsSql();
+	searchQry.select();
+	searchQry.from(["books"]);
+	searchQry.where(["book_name='"+name+"'"]);
+	searchQry.ready(db,"all",onComplete);
+	searchQry.fire();
 }
 
 
