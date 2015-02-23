@@ -3,7 +3,6 @@ var router = express.Router();
 var lib = require('../Src/lmsModule').init("./data/lms.db");
 var lmsLib = require('../Src/lmsLib');
 
-console.log(lib);
 router.get('/', function(req, res) {
   res.render('index', { title: 'router' });
 });
@@ -15,7 +14,7 @@ router.get('/userSearch', function(req, res) {
 router.post('/userSearch', function(req, res) {
 	var book = req.body.name;
  	lib.getSearchedBooks(book,function(err,topics){
-	  	res.render('userSearch',topics);
+	  	res.render('userSearch',{topics:topics});
   });
 });
 

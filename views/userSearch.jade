@@ -5,3 +5,19 @@ block content
   form(action = "userSearch" method="POST")
    input(type="text" name="name" required)
    input(type="submit" value="SEARCH" required)
+  div
+   if(topics)
+    table
+     tr
+      th Book Id
+      th Name Of the Book
+      th Status
+     each topic in topics
+      tr
+       td #{topic.id}
+       td #{topic.book_name}
+       td 
+        if(topic.available)
+         button Borrow
+        if(topic.available==0)
+         | Not Available
