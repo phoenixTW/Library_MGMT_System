@@ -25,10 +25,8 @@ router.get('/adminSearch', function (req, res) {
 router.post('/adminSearch', function (req, res) {
 	var book = req.body.name;
  	lib.getSearchedBooks(book,function(err,books){
- 		console.log(books);
 		 var booksStatistics = books && lmsLib.countBooks(books);
-		 console.log(booksStatistics);
-		 res.redirect('/adminSearch');
+		 res.render('adminSearch', {books : booksStatistics});
   	});
 });
 

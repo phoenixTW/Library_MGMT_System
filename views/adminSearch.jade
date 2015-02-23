@@ -5,3 +5,13 @@ block content
   form(action = "adminSearch" method="POST")
    input(type="text" name="name" required)
    input(type="submit" value="SEARCH" required)
+  div
+   if(books)
+    table
+     tr
+      th Name Of the Book
+      th Total no. of books available
+     each book in books
+      tr
+       td #{book.name}
+       td #{book.count}
