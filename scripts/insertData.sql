@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 insert into users values (1, "11111");
 insert into users values (2, "11112");
 insert into users values (12345, "mahesh"); 
+=======
+insert into users values (1, "11111", "U");
+insert into users values (2, "11112", "U");
+>>>>>>> a12a3df164dd105d71eeea55965e872eb67c21cf
 
 insert into booksStatus (id,book_name, available) values (12345,"JAVA", 1);
 insert into booksStatus (id,book_name, available, takenBy) values (12346,"Javascript Reference", 0, 1);

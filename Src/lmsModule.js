@@ -10,6 +10,7 @@ var _getSearchedBooks = function(name,db,onComplete){
 	searchQry.fire();
 }
 
+<<<<<<< HEAD
 var getBookNameOfId = function(bookId, db, onComplete) {
 	var getBookNameQry = new JsSql();
 	getBookNameQry.select("book_name");
@@ -50,6 +51,24 @@ var _getLendingsOfBookIdNOtReturned = function(id,db,onComplete){
 	lendingDetailsQry.ready(db,"get",onComplete);
 	lendingDetailsQry.fire();
 }
+=======
+var _addBook = function (data, db, onComplete) {
+	var addQuery = new JsSql();
+	addQuery.insertInto('booksStatus').someFields(['id', 'book_name', 'available']);
+	addQuery.values([data.id, data.name, 1]);
+	addQuery.ready(db, "run", onComplete);
+	addQuery.fire();
+};
+
+var _getUserDetails = function (id, db, onComplete) {
+	var getUserDataQry = new JsSql();
+	getUserDataQry.select(['password', 'user_type']);
+	getUserDataQry.from(["users"]);
+	getUserDataQry.where(["u_id = '" + id + "'"]);
+	getUserDataQry.ready(db, "get", onComplete);
+	getUserDataQry.fire();
+};
+>>>>>>> a12a3df164dd105d71eeea55965e872eb67c21cf
 
 var init = function(location){
 	var operate = function(operation){
@@ -72,6 +91,8 @@ var init = function(location){
 		getSearchedBooks : operate(_getSearchedBooks),
 		borrowBook: operate(_borrowBook),
 		getLendingsOfBookIdNOtReturned: operate(_getLendingsOfBookIdNOtReturned)
+		addBook: operate(_addBook),
+		getUserDetails: operate(_getUserDetails)
 	};
 	return records;
 };
