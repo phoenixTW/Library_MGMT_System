@@ -14,7 +14,7 @@ describe('lms_records',function(){
 	describe('#getSearchedTopics',function(){
 		it('getSearchedTopics gives the all related books which is searched',function(done){
 			expected = "JAVA";
-			lms_records.getSearchedTopics('JAVA',function(err,topics){
+			lms_records.getSearchedBooks('JAVA',function(err,topics){
 				assert.notOk(err);
 				console.log(topics);
 				assert.deepEqual(topics.book_name,expected);

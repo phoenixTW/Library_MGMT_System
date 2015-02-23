@@ -14,7 +14,7 @@ router.get('/userSearch', function(req, res) {
 router.post('/userSearch', function(req, res) {
 	var book = req.body.name;
 	console.log('-----------------',book);
- 	lib.getSearchedTopics(book,function(err,topics){
+ 	lib.getSearchedBooks(book,function(err,topics){
 	  	console.log("-----------------",topics);
 	  	res.render('userSearch',topics);
   });

@@ -1,6 +1,6 @@
 var sqlite3 = require("sqlite3").verbose();
 
-var _getSearchedTopics = function(name,db,onComplete){
+var _getSearchedBooks = function(name,db,onComplete){
 	var searchQuery = "select id,book_name from books where book_name = '"+name+"'";
 	db.get(searchQuery,	function(err,searchedBooks){
 		if(err)
@@ -30,7 +30,7 @@ var init = function(location){
 	};
 
 	var records = {	
-		getSearchedTopics : operate(_getSearchedTopics)
+		getSearchedBooks : operate(_getSearchedBooks)
 	};
 	return records;
 };
