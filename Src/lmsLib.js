@@ -11,7 +11,7 @@ exports.countBooks = function(books) {
 		var isExists = false;
 
 		countOfBooks.forEach(function (stat) {
-			(stat.name) && stat.count++ && (isExists = true);
+			(stat.name) && (stat.name == book_name) && stat.count++ && (isExists = true);
 		});
 
 		(!isExists) && ((book_details.name = book_name) && (book_details.count = 1)) && countOfBooks.push(book_details);
