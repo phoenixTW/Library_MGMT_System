@@ -26,7 +26,7 @@ var from = function(tableName){
 
 var connectConditionsWithConnectors = function(whereConnectors){
 	if(this.conditions.length != whereConnectors.length+1)
-		throw new Error("Some connector are missing");
+		throw new Error("Some connectors are missing");
 	this.query = this.conditions.reduce(function(query,condition,index){
 		var connector = whereConnectors[index];
 		return query.replace("#CONN#", connector);

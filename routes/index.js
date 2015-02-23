@@ -13,9 +13,10 @@ router.get('/userSearch', function(req, res) {
 
 router.post('/userSearch', function(req, res) {
 	var book = req.body.name;
- 	lib.getSearchedBooks(book,function(err,topics){
-	  	res.render('userSearch',{topics:topics});
-  });
+	var userId = 12345;
+ 	lib.getSearchedBooks(book,function(err,books){
+	  	res.render('userSearch',{topics:books, userId:userId});
+	});
 });
 
 router.get('/adminSearch', function (req, res) {
