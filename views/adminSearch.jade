@@ -15,8 +15,10 @@ block content
      table
       tr
        th Book name
-       th Total books
+       th AVAILABLE
+       th Total
       each book in books
        tr
         td #{book.name}
+        td #{book.available}
         td #{book.count}
