@@ -39,10 +39,9 @@ var _getSearchedBooks = function(name,db,onComplete){
 	var searchQuery = "select id,book_name from books where book_name = '"+name+"'";
 	db.get(searchQuery,	function(err,searchedBooks){
 		if(err)
-			console.log(err);
+			onComplete(err,null);
 		else
 			onComplete(null,searchedBooks);
-			console.log(searchedBooks);
 	});
 }
 
