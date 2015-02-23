@@ -1,5 +1,5 @@
-insert into users values (1, "11111");
-insert into users values (2, "11112");
+insert into users values (1, "11111", "U");
+insert into users values (2, "11112", "U");
 
 insert into booksStatus (id,book_name, available) values (12345,"JAVA", 1);
 insert into booksStatus (id,book_name, available, takenBy) values (12346,"Javascript Reference", 0, 1);

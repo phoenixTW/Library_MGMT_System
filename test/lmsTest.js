@@ -52,4 +52,21 @@ describe('lms_records',function(){
 		});
 	});
 
+	describe('#getUserDetails', function () {
+		it('should give password and user_type as U for 1', function (done) {
+			lms_records.getUserDetails("1", function (error, u_data) {
+				assert.notOk(error);
+				assert.deepEqual(u_data.password, "11111");
+				assert.deepEqual(u_data.user_type, "U");
+				done();
+			});
+		});
+
+		it('should give error for 32', function (done) {
+			lms_records.getUserDetails("32", function (error, u_data) {
+				assert.equal(u_data, undefined);
+				done();
+			});
+		});
+	});
 });
