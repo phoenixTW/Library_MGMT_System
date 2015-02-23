@@ -1,9 +1,9 @@
-insert into users values (1, 11111);
-insert into users values (2, 11112);
+insert into users values (1, "11111");
+insert into users values (2, "11112");
 
-insert into books (id,book_name, total_books) values (12345,"JAVA", 10);
-insert into books (id,book_name, total_books) values (12346,"Javascript Reference", 23);
-insert into books (id,book_name, total_books) values (12347,"MySql", 4);
+insert into books (id,book_name, available) values (12345,"JAVA", 1);
+insert into books (id,book_name, available) values (12346,"Javascript Reference", 0);
+insert into books (id,book_name, available) values (12347,"MySql", 1);
 
-insert into lending (book_id, user_id) values (12345, 1);
-insert into lending (book_id, user_id) values (12346, 2);
+insert into lending (book_id, user_id,taken_date,return_date) values (12345, 1,"12-feb-2015",null);
+insert into lending (book_id, user_id,taken_date,return_date) values (12346, 2,"2-feb-2015","10-feb-2015");
