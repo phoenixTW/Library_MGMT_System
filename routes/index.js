@@ -31,5 +31,16 @@ router.post('/adminSearch', function (req, res) {
   	});
 });
 
+router.get('/addBook', function (req, res) {
+	res.render('addBook');
+});
+
+router.post('/addBook', function (req, res) {
+	var data = {id: req.body.id, name: req.body.name};
+	lib.addBook(data, function (err, data){
+		res.redirect('addBook');
+	});
+});
+
 
 module.exports = router;
