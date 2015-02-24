@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "devStart": "nodemon ./bin/www",
     "initDB": "sh shellCommands/deleteDB.sh && sh shellCommands/initDB.sh",
-    "test" : "mocha test/*Test.js"
+    "test" : "mocha test/*Test.js",
+    "setup": "sh shellCommands/setup.sh"
   },
   "dependencies": {
     "express": "~4.9.0",

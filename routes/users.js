@@ -27,11 +27,12 @@ router.use(loadUserFromSession);
 router.post('/login', function (req, res) {
 	var userInfo = req.body;
 
+
 	lib.getUserDetails(userInfo.user_id, function (error, data) {
-		if(!error && data &&(data.password == userInfo.pwd)) {
+		if(!error && data && (data.password == userInfo.pwd)) {
 			req.session.userID = userInfo.user_id;
 			req.session.user_type = data.user_type;
-
+      
 			(data.user_type == "S") && res.redirect("/addUser");
       (data.user_type == "A") && res.redirect("dashboard/admin");
       (data.user_type == "U") && res.redirect("/userSearch");
@@ -55,14 +56,14 @@ router.get("/dashboard/admin", requireLogin, function (req, res) {
   res.render("admin");
 });
 
-// router.get('/dashboard/admin', requireLogin, function (req, res) {
-//   res.render('admin', null);
-// });
-
 router.post('/addUser', requireLogin, function (req, res) {
     var newUserDetails = req.body;
-    if (req.session.user_type == 'S') { newUserDetails.user_type = 'A'};
-    if (req.session.user_type == 'A') { newUserDetails.user_type = 'U'};
+    // newUserDetails.password = bcrypt.hashSync(newUserDetails.password);
+
+    (req.session.user_type == 'S')
+      ? newUserDetails.user_type = 'A'
+      : newUserDetails.user_type = 'U';
+    
     lib.addUser(newUserDetails, function (err) {
       (req.session.user_type == "S") && renderSuperUser(err, res);
       (req.session.user_type == "A") && renderAdmin(err, res);
@@ -87,8 +88,6 @@ router.get('/logout', requireLogin, function(req, res) {
   req.session.destroy();
   res.redirect('/');
 });
-
-// Add admin
 
 
 module.exports = router;

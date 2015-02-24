@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h1 WELCOME ADMIN
-  h1= "ADD BOOK"
-
-  a(href = "/dashboard/admin") Dashboard
-  |&nbsp;|&nbsp;
-  a(href = "/logout") logout
+  h1(align='center') WELCOME ADMIN
+  
+  div(align='right')
+   a(href = "/dashboard/admin") Dashboard
+   |&nbsp;|&nbsp;
+   a(href = "/logout") logout
   br
+  h1= "ADD BOOK"
 
   form(action = "addBook" method="POST")
    input(type="text" name="id" placeholder = "Enter Book ID" required)

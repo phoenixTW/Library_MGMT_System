@@ -1,11 +1,15 @@
 extends layout
 
 block content
-  h1 WELCOME ADMIN
-  a(href = "/addUser") Add a user
-  |&nbsp;|&nbsp;
-  a(href = "/adminSearch") Search Books
-  |&nbsp;|&nbsp;
-  a(href = "/addBook") Add a Book
-  |&nbsp;|&nbsp;
-  a(href = "/logout") logout
+  h1(align='center') WELCOME ADMIN
+
+  div(align='right')
+   a(href = "/logout") logout
+  br
+
+  h3 
+   a(href = "/addUser") Add a user
+  h3 
+   a(href = "/adminSearch") Search Books
+  h3 
+   a(href = "/addBook") Add a Book

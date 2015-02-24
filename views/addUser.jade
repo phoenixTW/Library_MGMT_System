@@ -1,13 +1,15 @@
 extends layout
 
 block content
-  h1 WELCOME ADMIN
-  h2 ADD A USER
-  a(href = "/dashboard/admin") Dashboard
-  |&nbsp;|&nbsp;
-  a(href = "/logout") logout
+  h1(align='center') WELCOME ADMIN
+
+  div(align='right')
+   a(href = "/dashboard/admin") Dashboard
+   |&nbsp;|&nbsp;
+   a(href = "/logout") logout
   br
 
+  h2 ADD A USER
   div
    form(action = "/addUser" method="POST")
     input(type="text" name="u_id" placeholder = "Enter USER ID" required)
