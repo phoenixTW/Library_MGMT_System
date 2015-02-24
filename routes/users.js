@@ -47,6 +47,10 @@ router.get('/addUser', requireLogin, function (req, res) {
   (req.session.user_type == "A") && res.render('admin', null);
 });
 
+router.get('/dashboard/user', requireLogin, function (req, res) {
+  res.render('user', null);
+});
+
 // router.get('/dashboard/admin', requireLogin, function (req, res) {
 //   res.render('admin', null);
 // });
