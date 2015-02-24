@@ -3,4 +3,14 @@ extends layout
 block content
   h1 WELCOME SUPER USER
 
+  form(action = "/addUser" method="POST")
+   input(type="text" name="u_id" placeholder = "Enter ADMIN ID" required)
+   br
+   input(type="password" name="password" required placeholder = "Enter password here")
+   br
+   input(type="submit" value="ADD ADMIN" required)
+  div
+   p #{message}
+
+
   a(href = "/logout") logout

@@ -27,6 +27,14 @@ var _getUserDetails = function (id, db, onComplete) {
 	getUserDataQry.fire();
 };
 
+var _addUser = function (userDetails, db, onComplete) {
+	var addUserQuery = new JsSql();
+	addUserQuery.insertInto('users');
+	addUserQuery.values([userDetails.u_id, userDetails.password, userDetails.user_type]);
+	addUserQuery.ready(db, "run", onComplete);
+	addUserQuery.fire();
+};
+
 var init = function(location){
 	var operate = function(operation){
 		return function(){
@@ -47,7 +55,8 @@ var init = function(location){
 	var records = {	
 		getSearchedBooks : operate(_getSearchedBooks),
 		addBook: operate(_addBook),
-		getUserDetails: operate(_getUserDetails)
+		getUserDetails: operate(_getUserDetails),
+		addUser: operate(_addUser)
 		// canBooksReturnByUser: operate(_canBooksReturnByUser)
 	};
 	return records;

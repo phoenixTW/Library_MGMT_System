@@ -69,4 +69,30 @@ describe('lms_records',function(){
 			});
 		});
 	});
+
+	describe('#addUser', function () {
+		it('should add username, password and user_type A for admin', function (done) {
+			var user = {u_id: "123", password : "123", user_type: "A"};
+			lms_records.addUser(user, function (err) {
+				assert.notOk(err);
+				lms_records.getUserDetails("123", function (error, u_data) {
+					assert.deepEqual(u_data.password, "123");
+					assert.deepEqual(u_data.user_type, "A");
+					done();
+				});
+			});
+		});
+
+		it('should add username, password and user_type U for admin', function (done) {
+			var user = {u_id: "123", password : "123", user_type: "U"};
+			lms_records.addUser(user, function (err) {
+				assert.notOk(err);
+				lms_records.getUserDetails("123", function (error, u_data) {
+					assert.deepEqual(u_data.password, "123");
+					assert.deepEqual(u_data.user_type, "U");
+					done();
+				});
+			});
+		});
+	});
 });
