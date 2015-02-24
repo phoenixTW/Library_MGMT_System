@@ -10,12 +10,11 @@ var _getSearchedBooks = function(name,db,onComplete){
 	searchQry.fire();
 }
 
-<<<<<<< HEAD
 var getBookNameOfId = function(bookId, db, onComplete) {
 	var getBookNameQry = new JsSql();
 	getBookNameQry.select("book_name");
 	getBookNameQry.from("booksStatus");
-	getBookNameQry.where(["id="+bookId]);
+	getBookNameQry.where(["id='"+bookId+"'"]);
 	getBookNameQry.ready(db, "get", onComplete);
 	getBookNameQry.fire();
 }
@@ -36,7 +35,7 @@ var _borrowBook = function(args, db, onComplete){
 	var borrowQry = new JsSql();
 	borrowQry.update("booksStatus");
 	borrowQry.set(["available", "takenBy"]).values([0, args[1]]);
-	borrowQry.where(["id="+args[0]]);
+	borrowQry.where(["id='"+args[0]+"'"]);
 	borrowQry.ready(db, "run", function(err){
 		err || insertBorrowBookDetails(args, db, onComplete);
 	});
@@ -51,7 +50,6 @@ var _getLendingsOfBookIdNOtReturned = function(id,db,onComplete){
 	lendingDetailsQry.ready(db,"get",onComplete);
 	lendingDetailsQry.fire();
 }
-=======
 var _addBook = function (data, db, onComplete) {
 	var addQuery = new JsSql();
 	addQuery.insertInto('booksStatus').someFields(['id', 'book_name', 'available']);
@@ -68,7 +66,6 @@ var _getUserDetails = function (id, db, onComplete) {
 	getUserDataQry.ready(db, "get", onComplete);
 	getUserDataQry.fire();
 };
->>>>>>> a12a3df164dd105d71eeea55965e872eb67c21cf
 
 var init = function(location){
 	var operate = function(operation){
@@ -90,7 +87,7 @@ var init = function(location){
 	var records = {	
 		getSearchedBooks : operate(_getSearchedBooks),
 		borrowBook: operate(_borrowBook),
-		getLendingsOfBookIdNOtReturned: operate(_getLendingsOfBookIdNOtReturned)
+		getLendingsOfBookIdNOtReturned: operate(_getLendingsOfBookIdNOtReturned),
 		addBook: operate(_addBook),
 		getUserDetails: operate(_getUserDetails)
 	};
