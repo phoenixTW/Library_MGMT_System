@@ -31,13 +31,14 @@ router.post('/adminSearch', function (req, res) {
   	});
 });
 
-<<<<<<< HEAD
 router.get('/borrow/:id', function(req, res) {
 	var userId = 12345;
 	var bookId = req.params.id;
 	lib.borrowBook([bookId, userId], function(err, book){
 		res.redirect('/search?name='+book.book_name);
-=======
+	});
+});
+
 router.get('/addBook', function (req, res) {
 	res.render('addBook');
 });
@@ -47,9 +48,14 @@ router.post('/addBook', function (req, res) {
 	lib.addBook(data, function (err, data){
 		if(err) res.render('addBook',{message: "Invalid book ID"}); 
 		res.render('addBook',{message: "Book added successfully"}); 
->>>>>>> a12a3df164dd105d71eeea55965e872eb67c21cf
 	});
 });
 
+router.get('/return/:id',function(req,res){
+	var bookId = req.params.id;
+	lib.returnBook(bookId, function(err, book){
+		res.redirect('/search?name='+book.book_name);
+	});
+});
 
 module.exports = router;

@@ -14,7 +14,7 @@ var getBookNameOfId = function(bookId, db, onComplete) {
 	var getBookNameQry = new JsSql();
 	getBookNameQry.select("book_name");
 	getBookNameQry.from("booksStatus");
-	getBookNameQry.where(["id="+bookId]);
+	getBookNameQry.where(["id='"+bookId+"'"]);
 	getBookNameQry.ready(db, "get", onComplete);
 	getBookNameQry.fire();
 }
@@ -35,7 +35,7 @@ var _borrowBook = function(args, db, onComplete){
 	var borrowQry = new JsSql();
 	borrowQry.update("booksStatus");
 	borrowQry.set(["available", "takenBy"]).values([0, args[1]]);
-	borrowQry.where(["id="+args[0]]);
+	borrowQry.where(["id='"+args[0]+"'"]);
 	borrowQry.ready(db, "run", function(err){
 		err || insertBorrowBookDetails(args, db, onComplete);
 	});
