@@ -1,7 +1,14 @@
 extends layout
 
 block content
-  h1= "ADMIN SEARCH"
+  h1 WELCOME ADMIN
+  h2= "ADMIN SEARCH"
+
+  a(href = "/dashboard/admin") Dashboard
+  |&nbsp;|&nbsp;
+  a(href = "/logout") logout
+  br
+
   form(action = "adminSearch" method="POST")
    input(type="text" name="name" required)
    input(type="submit" value="SEARCH" required)

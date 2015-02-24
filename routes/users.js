@@ -28,13 +28,13 @@ router.post('/login', function (req, res) {
 	var userInfo = req.body;
 
 	lib.getUserDetails(userInfo.user_id, function (error, data) {
-		if(!error && (data.password == userInfo.pwd)) {
+		if(!error && data &&(data.password == userInfo.pwd)) {
 			req.session.userID = userInfo.user_id;
 			req.session.user_type = data.user_type;
 
-			((data.user_type == "S") || (data.user_type == "A")) && res.redirect("/addUser");
-   //    (data.user_type == "A") && res.redirect("dashboard/admin");
-      (data.user_type == "U") && res.redirect("dashboard/user");
+			(data.user_type == "S") && res.redirect("/addUser");
+      (data.user_type == "A") && res.redirect("dashboard/admin");
+      (data.user_type == "U") && res.redirect("/userSearch");
 
 		}
 
@@ -44,11 +44,15 @@ router.post('/login', function (req, res) {
 
 router.get('/addUser', requireLogin, function (req, res) {
 	(req.session.user_type == "S") && res.render('superUserDash', null);
-  (req.session.user_type == "A") && res.render('admin', null);
+  (req.session.user_type == "A") && res.render('addUser', null);
 });
 
 router.get('/dashboard/user', requireLogin, function (req, res) {
   res.render('user', null);
+});
+
+router.get("/dashboard/admin", requireLogin, function (req, res) {
+  res.render("admin");
 });
 
 // router.get('/dashboard/admin', requireLogin, function (req, res) {
@@ -74,9 +78,9 @@ var renderSuperUser = function (err, res) {
 
 var renderAdmin = function (err, res) {
       err && 
-        res.render('admin', {message: "Invalid USER ID"});
+        res.render('addUser', {message: "Invalid USER ID"});
       !err && 
-        res.render('admin', {message: "New USER added successfully"});
+        res.render('addUser', {message: "New USER added successfully"});
 };
 
 router.get('/logout', requireLogin, function(req, res) {
