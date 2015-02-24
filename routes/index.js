@@ -13,7 +13,7 @@ router.get('/userSearch', function(req, res) {
 
 router.get('/search', function(req, res) {
 	var book = req.query.name;
-	var userId = 12345;
+	var userId = req.session.userID;
  	lib.getSearchedBooks(book,function(err,books){
 	  	res.render('userSearch',{topics:books, userId:userId});
 	});
@@ -32,7 +32,7 @@ router.post('/adminSearch', function (req, res) {
 });
 
 router.get('/borrow/:id', function(req, res) {
-	var userId = 12345;
+	var userId = req.session.userID;
 	var bookId = req.params.id;
 	lib.borrowBook([bookId, userId], function(err, book){
 		res.redirect('/search?name='+book.book_name);
