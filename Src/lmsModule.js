@@ -121,7 +121,7 @@ var init = function(location){
 		getLendingsOfBookIdNOtReturned: operate(_getLendingsOfBookIdNOtReturned),
 		addBook: operate(_addBook),
 		getUserDetails: operate(_getUserDetails),
-		returnBook: operate(_returnBook)
+		returnBook: operate(_returnBook),
 		addUser: operate(_addUser),
 		getUserDetails: operate(_getUserDetails)
 	};
