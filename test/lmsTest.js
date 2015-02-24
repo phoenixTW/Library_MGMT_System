@@ -111,6 +111,32 @@ describe('lms_records',function(){
 		});
 	});
 
+	describe("#returnBook", function(){
+		it("should update available status to 1 and takenBy to null", function(done){
+			lms_records.borrowBook(["12345","1"],function(err,book){});
+			lms_records.returnBook("12345",function(err,bookDetails){
+				assert.notOk(err);
+				assert.deepEqual(bookDetails, {book_name:'JAVA'});
+				lms_records.getSearchedBooks('JAVA', function(err, books){
+					assert.deepEqual(books,[ { id: "12345", book_name: 'JAVA', available: 1, takenBy: "null"  },
+						{ id: "12346", book_name: 'Javascript Reference', available: 0, takenBy: "1" } ]);
+					done();
+				});
+			});
+		});
+
+		it("should update return_date in lending table where the bookId is present and return date is null", function(done){
+			lms_records.borrowBook(["12345","1"],function(err,book){});
+			lms_records.returnBook("12345",function(err,bookDetails){
+				assert.notOk(err);
+				lms_records.getLendingsOfBookIdNOtReturned("12345",function(er,book){
+					assert.notOk(book);
+					done();
+				});
+			});
+		});		
+	});
+
 	describe('#addUser', function () {
 		it('should add username, password and user_type A for admin', function (done) {
 			var user = {u_id: "123", password : "123", user_type: "A"};

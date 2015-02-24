@@ -68,6 +68,28 @@ var _getUserDetails = function (id, db, onComplete) {
 	getUserDataQry.fire();
 };
 
+var updateBookReturnDate = function(bookId, db, onComplete) {
+	var date = new Date();
+	var updateRDQry = new JsSql();
+	updateRDQry.update("lending");
+	updateRDQry.set(["return_date"]).values([String(date).slice(0,21)]);
+	updateRDQry.where(["book_id='"+bookId+"'", "return_date='null'"]).connectors(["AND"]);
+	updateRDQry.ready(db, "run", function(err){
+		err || getBookNameOfId(bookId, db, onComplete);
+	});
+	updateRDQry.fire();
+}
+
+var _returnBook = function(bookId, db, onComplete) {
+	var returnQry = new JsSql();
+	returnQry.update("booksStatus");
+	returnQry.set(["available","takenBy"]).values([1, null]);
+	returnQry.where(["id='"+bookId+"'"]);
+	returnQry.ready(db,"run", function(err){
+		err || updateBookReturnDate(bookId, db, onComplete);
+	});
+	returnQry.fire();
+}
 var _addUser = function (userDetails, db, onComplete) {
 	var addUserQuery = new JsSql();
 	addUserQuery.insertInto('users');
@@ -99,8 +121,8 @@ var init = function(location){
 		getLendingsOfBookIdNOtReturned: operate(_getLendingsOfBookIdNOtReturned),
 		addBook: operate(_addBook),
 		getUserDetails: operate(_getUserDetails),
+		returnBook: operate(_returnBook)
 		addUser: operate(_addUser),
-		// canBooksReturnByUser: operate(_canBooksReturnByUser)
 		getUserDetails: operate(_getUserDetails)
 	};
 
