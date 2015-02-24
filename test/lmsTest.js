@@ -12,7 +12,7 @@ describe('lms_records',function(){
 	});
 
 	describe('#getSearchedTopics',function(){
-		it('getSearchedTopics gives the all related books which book name is java',function(done){
+		it('getSearchedTopics gives the all related books which book name is java',function (done){
 			var expected = "JAVA";
 			lms_records.getSearchedBooks('JAVA',function(err,topics){
 				assert.notOk(err);
@@ -21,7 +21,7 @@ describe('lms_records',function(){
 			});
 		});
 
-		it('getSearchedTopics gives the all related books which is searched',function(done){
+		it('getSearchedTopics gives the all related books which is searched',function (done){
 			lms_records.getSearchedBooks('JAVA',function(err,topics){
 				assert.notOk(err);
 				assert.deepEqual(topics, [ { id: "12345", book_name: 'JAVA', available: 1, takenBy: null },
@@ -43,7 +43,6 @@ describe('lms_records',function(){
 				});
 			});
 		});
-	
 
 		it("should insert the new record in lendings with taken date and put null in return date", function(done){
 			lms_records.borrowBook(["12345","1"], function(err, book){
@@ -67,6 +66,20 @@ describe('lms_records',function(){
 				lms_records.getSearchedBooks('RAFA',function(err,topics){
 					assert.notOk(err);
 					assert.deepEqual(topics, [ { id: "12247", book_name: 'RAFA', available: 1, takenBy: null }]);
+					done();
+				});
+			});
+		});
+
+
+		it("should insert the new record in lendings with taken date and put null in return date", function (done){
+			lms_records.borrowBook(["12345",1], function(err, book){
+				assert.notOk(err);
+				assert.equal(book.book_name , "JAVA");
+				lms_records.getLendingsOfBookIdNOtReturned("12345",function(er,book){
+					assert.equal(book.len_id,3);
+					assert.equal(book.book_id, "12345");
+					assert.equal(book.user_id, 1);
 					done();
 				});
 			});
@@ -124,4 +137,29 @@ describe('lms_records',function(){
 		});		
 	});
 
+	describe('#addUser', function () {
+		it('should add username, password and user_type A for admin', function (done) {
+			var user = {u_id: "123", password : "123", user_type: "A"};
+			lms_records.addUser(user, function (err) {
+				assert.notOk(err);
+				lms_records.getUserDetails("123", function (error, u_data) {
+					assert.deepEqual(u_data.password, "123");
+					assert.deepEqual(u_data.user_type, "A");
+					done();
+				});
+			});
+		});
+
+		it('should add username, password and user_type U for admin', function (done) {
+			var user = {u_id: "123", password : "123", user_type: "U"};
+			lms_records.addUser(user, function (err) {
+				assert.notOk(err);
+				lms_records.getUserDetails("123", function (error, u_data) {
+					assert.deepEqual(u_data.password, "123");
+					assert.deepEqual(u_data.user_type, "U");
+					done();
+				});
+			});
+		});
+	});
 });

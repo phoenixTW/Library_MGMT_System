@@ -50,6 +50,7 @@ var _getLendingsOfBookIdNOtReturned = function(id,db,onComplete){
 	lendingDetailsQry.ready(db,"get",onComplete);
 	lendingDetailsQry.fire();
 }
+
 var _addBook = function (data, db, onComplete) {
 	var addQuery = new JsSql();
 	addQuery.insertInto('booksStatus').someFields(['id', 'book_name', 'available']);
@@ -89,6 +90,13 @@ var _returnBook = function(bookId, db, onComplete) {
 	});
 	returnQry.fire();
 }
+var _addUser = function (userDetails, db, onComplete) {
+	var addUserQuery = new JsSql();
+	addUserQuery.insertInto('users');
+	addUserQuery.values([userDetails.u_id, userDetails.password, userDetails.user_type]);
+	addUserQuery.ready(db, "run", onComplete);
+	addUserQuery.fire();
+};
 
 var init = function(location){
 	var operate = function(operation){
@@ -114,7 +122,10 @@ var init = function(location){
 		addBook: operate(_addBook),
 		getUserDetails: operate(_getUserDetails),
 		returnBook: operate(_returnBook)
+		addUser: operate(_addUser),
+		getUserDetails: operate(_getUserDetails)
 	};
+
 	return records;
 };
 
