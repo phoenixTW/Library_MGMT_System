@@ -90,6 +90,7 @@ var _returnBook = function(bookId, db, onComplete) {
 	});
 	returnQry.fire();
 }
+
 var _addUser = function (userDetails, db, onComplete) {
 	var addUserQuery = new JsSql();
 	addUserQuery.insertInto('users');
@@ -97,6 +98,17 @@ var _addUser = function (userDetails, db, onComplete) {
 	addUserQuery.ready(db, "run", onComplete);
 	addUserQuery.fire();
 };
+
+var _getBookHistory = function(bookName,db,onComplete){
+	var getHistoryQry = new JsSql();
+	getHistoryQry.query = "select " +
+		"b.id, l.user_id, l.taken_date, l.return_date " + 
+		"from booksStatus b LEFT OUTER JOIN lending l " +
+		"ON(b.id = l.book_id) where b.book_name='" + bookName + "';";
+	getHistoryQry.ready(db, "all", onComplete);
+	getHistoryQry.fire();
+
+}
 
 var init = function(location){
 	var operate = function(operation){
@@ -123,7 +135,8 @@ var init = function(location){
 		getUserDetails: operate(_getUserDetails),
 		returnBook: operate(_returnBook),
 		addUser: operate(_addUser),
-		getUserDetails: operate(_getUserDetails)
+		getUserDetails: operate(_getUserDetails),
+		getBookHistory:operate(_getBookHistory)
 	};
 
 	return records;

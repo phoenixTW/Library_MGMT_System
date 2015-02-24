@@ -162,4 +162,16 @@ describe('lms_records',function(){
 			});
 		});
 	});
+
+	describe("#getBookHistory",function(){
+		it("should give the all books history of given book name",function(done){
+			lms_records.getBookHistory("JAVA",function(err,history){
+				assert.notOk(err);
+				assert.deepEqual(history,[ { id: '12345',user_id: '1',
+    				taken_date: '12-feb-2015', return_date: '10-feb-2015' } 
+    			]);
+				done();
+			});
+		});
+	});
 });

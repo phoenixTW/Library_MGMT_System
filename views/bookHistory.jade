@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 History of Book : #{bookName}
+
+  table
+   tr
+    th Book Id
+    th Taken By
+    th Taken Date
+    th Return Date
+   each book in history
+    tr 
+     td #{book.id}
+     td #{book.user_id}
+      if(!book.user_id) 
+       |---
+     td #{book.taken_date}
+      if(!book.taken_date) 
+       |---
+     td #{book.return_date}
+      if(!book.return_date) 
+       |---
+
+
+

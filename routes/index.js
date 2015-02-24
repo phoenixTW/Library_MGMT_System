@@ -58,4 +58,10 @@ router.get('/return/:id',function(req,res){
 	});
 });
 
+router.get('/bookHistory/:name',function(req,res){
+	var bookName = req.params.name;
+	lib.getBookHistory(bookName,function(err,bookHistory){
+		res.render('bookHistory',{history:bookHistory,bookName:bookName});
+	});
+});
 module.exports = router;
