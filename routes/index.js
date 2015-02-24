@@ -3,7 +3,7 @@ var router = express.Router();
 var lib = require('../Src/lmsModule').init("./data/lms.db");
 var lmsLib = require('../Src/lmsLib');
 
-router.get('/', function(req, res) {
+router.get(['/', '/login'], function(req, res) {
   res.render('index', { title: 'router' });
 });
 
