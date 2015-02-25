@@ -5,17 +5,19 @@ block content
   
   div(align='right')
    a(href = "/dashboard/admin") Dashboard
-   |&nbsp;|&nbsp;
+   |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
-  br
-  h1= "ADD BOOK"
+  hr
 
-  form(action = "addBook" method="POST")
-   input(type="text" name="id" placeholder = "Enter Book ID" required)
-   br
-   input(type="text" name="name" required placeholder = "Enter Book name")
-   br
-   input(type="submit" value="ADD" required)
-  div
-   p #{message}
+  h2(align = "center") ADD BOOK
+
+  div(class = "add_form")
+   form(action = "addBook" method="POST")
+    input(type="text" class = "inputBox" name="id" placeholder = "Enter Book ID" required)
+    br
+    input(type="text" class = "inputBox" name="name" required placeholder = "Enter Book name")
+    br
+    input(type="submit" class = "register-button" value="ADD" required)
+   div(class = "error_message")
+    p(align = "center") #{message}
   
