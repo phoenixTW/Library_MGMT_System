@@ -8,7 +8,9 @@ body {
 }
 */
 a {
-  color: #00B7FF;
+	text-decoration: none;
+	font-size: 25px;
+	color: #00B7FF;
 }
 
 .header {
@@ -46,6 +48,12 @@ a {
 	display: inline;
 }
 
+.add_form {
+	height: 500px;
+	width: 650px;
+	margin-left: 600px;
+}
+
 .heading {
 	font-size: 30px;
 	height: 30px;
@@ -68,6 +76,26 @@ a {
 .error_message {
 	font-size: 25px;
 	color: red;
+}
+
+.tiles {
+	margin-top: 40px;
+	height: 300px;
+	width: 350px;
+	margin-left: 150px;
+	float: left;
+	display: inline-block;
+}
+
+.tiles_image {
+	background-color: 
+	margin-top: 40px;
+	height: 200px;
+	width: 350px;
+	float: left;
+	display: inline-block;	
+	opacity: 0.6;
+	filter: alpha(opacity=40);
 }
 
 	/*	button	 */
