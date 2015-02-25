@@ -27,6 +27,7 @@ block content
        th Total
       each book in books
        tr
-        td #{book.name}
+        td
+         a(href = "/bookHistory/#{book.name}") #{book.name}
         td #{book.available}
         td #{book.count}

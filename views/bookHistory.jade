@@ -3,6 +3,13 @@ extends layout
 block content
   h1 History of Book : #{bookName}
 
+  div(align='right')
+   a(href = "/dashboard/admin") Dashboard
+   |&nbsp;|&nbsp;
+   a(href = "/logout") logout
+  br
+
+
   table
    tr
     th Book Id

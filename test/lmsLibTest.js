@@ -11,7 +11,7 @@ describe('lms_lib',function(){
 		});
 
 		it('should return [{name: "java", count:2, available: 2}] for input [{"book_name":"java", available: 1}, {"book_name":"java", available: 1}]',function(done){
-			expected = 	[{name: "java", count:2, available: 2}];
+			expected = 	[{name: "java", count:2, available: 2,}];
 			assert.deepEqual(lib.countBooks([{"book_name":"java", available: 1}, {"book_name":"java", available: 1}]),expected);
 			done();
 		});
