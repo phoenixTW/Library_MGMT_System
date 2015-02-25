@@ -16,7 +16,7 @@ router.get('/search', rl.requireLogin, function(req, res) {
 	var book = req.query.name;
 	var userId = req.session.userID;
  	lib.getSearchedBooks(book,function(err,books){
-	  	res.render('userSearch',{books:books, userId:userId});
+	  	res.render('userSearch',{topics:books, userId:userId});
 	});
 });
 
