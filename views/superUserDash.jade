@@ -1,7 +1,10 @@
 extends layout
 
 block content
-  h1 WELCOME SUPER USER
+  h1(align='center') WELCOME SUPER USER
+  
+  div(align='right')
+   a(href = "/logout") logout
 
   form(action = "/addUser" method="POST")
    input(type="text" name="u_id" placeholder = "Enter ADMIN ID" required)
@@ -11,6 +14,3 @@ block content
    input(type="submit" value="ADD ADMIN" required)
   div
    p #{message}
-
-
-  a(href = "/logout") logout
