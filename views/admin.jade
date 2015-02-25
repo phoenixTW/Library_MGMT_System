@@ -5,11 +5,18 @@ block content
 
   div(align='right')
    a(href = "/logout") logout
-  br
+  hr
+  
+  div(class = "tiles")
+   a(href = "/addUser")
+    img(src = "/images/add-user.jpg" class = "tiles_image")
+    h3(align = "center") Add a user
 
-  h3 
-   a(href = "/addUser") Add a user
-  h3 
-   a(href = "/adminSearch") Search Books
-  h3 
-   a(href = "/addBook") Add a Book
+  div(class = "tiles")
+   a(href = "/adminSearch")
+    img(src = "/images/book_search.png" class = "tiles_image")
+    h3(align = "center") Search Books
+  div(class = "tiles")
+   a(href = "/addBook")
+    img(src = "/images/add-book.png" class = "tiles_image")
+    h3(align = "center") Add a Book

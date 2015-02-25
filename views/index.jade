@@ -1,16 +1,15 @@
 extends layout
 
 block content
-  h1(align='center') LIBERO
-  h2(align='center') LIBRARY MANAGEMENT SYSTEM
-  BR
-  h3 LOGIN
+  img(src="images/library.jpg" class = 'wrapper_pic')
+  div(class = "login_form")
+   h3(class = "heading") LOGIN
 
-  form(action = "login" method="POST")
-   input(type="text" name="user_id" placeholder = "Enter User ID" required)
-   br
-   input(type="password" name="pwd" required placeholder = "Enter Password")
-   br
-   input(type="submit" value="LOGIN" required)
-  div
-   p #{message}
+   form(action = "login" method="POST")
+    input(type="text" class = "inputBox" name="user_id" placeholder = "Enter User ID" required)
+    br
+    input(type="password" class = "inputBox" name="pwd" required placeholder = "Enter Password")
+    br
+    input(type="submit" class = "register-button" value="LOGIN" required)
+   div(class = "error_message")
+    p(align = "center") #{message}
