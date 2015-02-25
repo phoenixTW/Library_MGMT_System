@@ -25,26 +25,26 @@ var requireLogin = function(req, res, next) {
 router.use(loadUserFromSession);
 
 router.post('/login', function (req, res) {
-	var userInfo = req.body;
+  var userInfo = req.body;
 
 
-	lib.getUserDetails(userInfo.user_id, function (error, data) {
-		if(!error && data && (data.password == userInfo.pwd)) {
-			req.session.userID = userInfo.user_id;
-			req.session.user_type = data.user_type;
+  lib.getUserDetails(userInfo.user_id, function (error, data) {
+    if(!error && data && bcrypt.compareSync(userInfo.pwd,data.password)) {
+      req.session.userID = userInfo.user_id;
+      req.session.user_type = data.user_type;
       
-			(data.user_type == "S") && res.redirect("/addUser");
+      (data.user_type == "S") && res.redirect("/addUser");
       (data.user_type == "A") && res.redirect("dashboard/admin");
       (data.user_type == "U") && res.redirect("/userSearch");
 
-		}
+    }
 
-		else res.render('index', {message: "Invalid ID or password"});
-	});
+    else res.render('index', {message: "Invalid ID or password"});
+  });
 });
 
 router.get('/addUser', requireLogin, function (req, res) {
-	(req.session.user_type == "S") && res.render('superUserDash', null);
+  (req.session.user_type == "S") && res.render('superUserDash', null);
   (req.session.user_type == "A") && res.render('addUser', null);
 });
 
@@ -58,7 +58,7 @@ router.get("/dashboard/admin", requireLogin, function (req, res) {
 
 router.post('/addUser', requireLogin, function (req, res) {
     var newUserDetails = req.body;
-    // newUserDetails.password = bcrypt.hashSync(newUserDetails.password);
+    newUserDetails.password = bcrypt.hashSync(newUserDetails.password);
 
     (req.session.user_type == 'S')
       ? newUserDetails.user_type = 'A'
