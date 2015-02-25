@@ -1,10 +1,13 @@
 extends layout
 
 block content
-  h1(align='center') WELCOME USER
   div(align='right')
+   a(href = "/dashboard/admin") Dashboard
+   |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
   hr
+    
+  h3(align='left') WELCOME USER
 
   h2(align = "center") USER SEARCH
 
@@ -25,8 +28,8 @@ block content
        div(class = "table_alignment")
         each topic in topics
          tr
-          td <font size="5"> #{topic.id} </font>
-          td <font size="5"> #{topic.book_name} </font>
+          td <font size="4"> #{topic.id} </font>
+          td <font size="4"> #{topic.book_name} </font>
           td 
            if(topic.available == 1)
             form(action="borrow/#{topic.id}")
