@@ -5,12 +5,14 @@ block content
   
   div(align='right')
    a(href = "/logout") logout
-
-  form(action = "/addUser" method="POST")
-   input(type="text" name="u_id" placeholder = "Enter ADMIN ID" required)
-   br
-   input(type="password" name="password" required placeholder = "Enter password here")
-   br
-   input(type="submit" value="ADD ADMIN" required)
-  div
-   p #{message}
+  hr
+  
+  div(class = "add_form")
+   form(action = "/addUser" method="POST")
+    input(type="text" class = "inputBox" name="u_id" placeholder = "Enter ADMIN ID" required)
+    br
+    input(type="password" class = "inputBox" name="password" required placeholder = "Enter password here")
+    br
+    input(type="submit" class = "register-button" value="ADD ADMIN" required)
+   div(class = "error_message")
+    p(align = "center") #{message}
