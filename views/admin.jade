@@ -1,12 +1,14 @@
 extends layout
+block vars
+  - var title = "LIBERO | admin"
 
 block content
-  h1(align='center') WELCOME ADMIN
 
   div(align='right')
    a(href = "/logout") logout
   hr
   
+  h3(align='left') WELCOME ADMIN
   div(class = "tiles")
    a(href = "/addUser")
     img(src = "/images/add-user.jpg" class = "tiles_image")

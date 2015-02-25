@@ -1,33 +1,41 @@
 extends layout
+block vars
+  - var title = "LIBERO | admin search"
 
 block content
-  h1(align='center') WELCOME ADMIN
+
 
   div(align='right')
    a(href = "/dashboard/admin") Dashboard
-   |&nbsp;|&nbsp;
+   |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
-  br
+  hr
+    
+  h3(align='left') WELCOME ADMIN
 
-  h2= "ADMIN SEARCH"
-  form(action = "adminSearch" method="POST")
-   input(type="text" name="name" required)
-   input(type="submit" value="SEARCH" required)
+  h2(align = "center") ADMIN SEARCH
+
+  div(align = "center")
+   form(action = "adminSearch" method="POST")
+    input(type="text" class = "search_box" placeholder = "Enter the book name here....." name="name" required)
+    input(type="submit" class = "search-button" value="SEARCH" required)
   
-  if(books)
-   div
-    if(books.length == 0)
-     p NOT AVAILABLE
-
-    if(books.length > 0)
-     table(class='search_table')
-      tr
-       th Book name
-       th AVAILABLE
-       th Total
-      each book in books
+   if(books)
+    div
+     if(books.length == 0)
+      p NOT AVAILABLE
+ 
+     if(books.length > 0)
+      table(class='search_table')
        tr
-        td
-         a(href = "/bookHistory/#{book.name}") #{book.name}
-        td #{book.available}
-        td #{book.count}
+        th BOOK NAME
+        th AVAILABLE
+        th TOTAL
+
+       div(class = "table_alignment")
+        each book in books
+         tr
+          td
+           a(href = "/bookHistory/#{book.name}") #{book.name}
+          td <font size="4">#{book.available}</font>
+          td <font size="4">#{book.count}</font>

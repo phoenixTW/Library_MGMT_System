@@ -59,6 +59,7 @@ router.get("/dashboard/admin", requireLogin, function (req, res) {
 router.post('/addUser', requireLogin, function (req, res) {
     var newUserDetails = req.body;
     newUserDetails.password = bcrypt.hashSync(newUserDetails.password);
+    newUserDetails.u_id = req.body.u_id.toLowerCase();
 
     (req.session.user_type == 'S')
       ? newUserDetails.user_type = 'A'
@@ -72,16 +73,16 @@ router.post('/addUser', requireLogin, function (req, res) {
 
 var renderSuperUser = function (err, res) {
       err && 
-        res.render('superUserDash', {message: "Invalid ADMIN ID"});
+        res.render('superUserDash', {message: "Invalid ADMIN ID", isSuccess: 0});
       !err && 
-        res.render('superUserDash', {message: "New Admin added successfully"});
+        res.render('superUserDash', {message: "New Admin added successfully", isSuccess: 1});
 };
 
 var renderAdmin = function (err, res) {
       err && 
-        res.render('addUser', {message: "Invalid USER ID"});
+        res.render('addUser', {message: "Invalid USER ID", isSuccess: 0});
       !err && 
-        res.render('addUser', {message: "New USER added successfully"});
+        res.render('addUser', {message: "New USER added successfully", isSuccess: 1});
 };
 
 router.get('/logout', requireLogin, function(req, res) {

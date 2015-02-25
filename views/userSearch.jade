@@ -1,35 +1,44 @@
 extends layout
+block vars
+  - var title = "LIBERO | user search"
 
 block content
-  h1(align='center') WELCOME USER
   div(align='right')
+   a(href = "/dashboard/admin") Dashboard
+   |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
-  h2= "USER SEARCH"
+  hr
+    
+  h3(align='left') WELCOME USER
 
-  form(action = "search")
-   input(type="text" name="name" required)
-   input(type="submit" value="SEARCH" required)
-  div
-   if(books)
-    if(books.length == 0)
-     | No results found
-    if(books.length > 0)
-     table(class='search_table')
-      tr
-       th Book Id
-       th Name Of the Book
-       th Status
-      each book in books
+  h2(align = "center") USER SEARCH
+
+  div(align = "center")
+   form(action = "search")
+    input(type="text" class = "search_box" placeholder = "Enter the book name here....." name="name" required)
+    input(type="submit" class = "search-button" value="SEARCH" required)
+   div
+    if(topics)
+     if(topics.length == 0)
+      | No results found
+     if(topics.length > 0)
+      table(class='search_table')
        tr
-        td #{book.id}
-        td #{book.book_name}
-        td 
-         if(book.available == 1)
-          form(action="borrow/#{book.id}")
-           input(type = "submit" value = "BORROW")
-         if(userId == book.takenBy)
-          form(action="return/#{book.id}")
-           input(type = "submit" value = "RETURN")
-         if(book.available == 0 && userId != book.takenBy)
-          | Not Available
+        th Book Id
+        th Name Of the Book
+        th Status
+       div(class = "table_alignment")
+        each topic in topics
+         tr
+          td <font size="4"> #{topic.id} </font>
+          td <font size="4"> #{topic.book_name} </font>
+          td 
+           if(topic.available == 1)
+            form(action="borrow/#{topic.id}")
+             input(type = "submit" class = "action-button" value = "BORROW")
+           if(userId == topic.takenBy)
+            form(action="return/#{topic.id}")
+             input(type = "submit" class = "action-button" value = "RETURN")
+           if(topic.available == 0 && userId != topic.takenBy)
+            | Not Available
          

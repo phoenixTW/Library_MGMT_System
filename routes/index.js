@@ -45,10 +45,10 @@ router.get('/addBook', rl.requireLogin, function (req, res) {
 });
 
 router.post('/addBook', rl.requireLogin, function (req, res) {
-	var data = {id: req.body.id, name: req.body.name};
+	var data = {id: req.body.id.toLowerCase(), name: req.body.name};
 	lib.addBook(data, function (err, data){
-		if(err) res.render('addBook',{message: "Invalid book ID"}); 
-		res.render('addBook',{message: "Book added successfully"}); 
+		if(err) res.render('addBook',{message: "Invalid book ID", isSuccess: 0}); 
+		res.render('addBook',{message: "Book added successfully", isSuccess: 1}); 
 	});
 });
 

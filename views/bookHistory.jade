@@ -1,14 +1,16 @@
 extends layout
+block vars
+  - var title = "LIBERO | book history"
 
 block content
-  h1 History of Book : #{bookName}
 
   div(align='right')
    a(href = "/dashboard/admin") Dashboard
-   |&nbsp;|&nbsp;
+   |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
-  br
+  hr
 
+  h3 History of Book : #{bookName}
 
   table(class='history_table')
    tr
@@ -16,18 +18,19 @@ block content
     th Taken By
     th Taken Date
     th Return Date
-   each book in history
-    tr 
-     td #{book.id}
-     td #{book.user_id}
-      if(!book.user_id) 
-       |---
-     td #{book.taken_date}
-      if(!book.taken_date) 
-       |---
-     td #{book.return_date}
-      if(!book.return_date) 
-       |---
+   div(class = "table_alignment")
+    each book in history
+     tr 
+      td #{book.id}
+      td #{book.user_id}
+       if(!book.user_id) 
+        |---
+      td #{book.taken_date}
+       if(!book.taken_date) 
+        |---
+      td #{book.return_date}
+       if(!book.return_date) 
+        |---
 
 
 

@@ -1,11 +1,15 @@
 extends layout
+block vars
+  - var title = "LIBERO | add admin"
 
 block content
-  h1(align='center') WELCOME SUPER USER
-  
   div(align='right')
    a(href = "/logout") logout
   hr
+
+  h3(align='left') WELCOME SUPER USER
+  h2(align='center') ADD NEW ADMIN
+
   
   div(class = "add_form")
    form(action = "/addUser" method="POST")
@@ -14,5 +18,10 @@ block content
     input(type="password" class = "inputBox" name="password" required placeholder = "Enter password here")
     br
     input(type="submit" class = "register-button" value="ADD ADMIN" required)
-   div(class = "error_message")
-    p(align = "center") #{message}
+
+   if isSuccess
+    div(class = "success_message")
+     p(align = "center") #{message}
+   else
+    div(class = "error_message")
+     p(align = "center") #{message}
