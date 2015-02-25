@@ -19,7 +19,7 @@ var loadUserFromSession = function(req, res, next) {
 };
 
 var requireLogin = function(req, res, next) {
-  req.user ? next() : res.redirect('/');
+  req.session.userID ? next() : res.redirect('/');
 };
 
 router.use(loadUserFromSession);
@@ -91,3 +91,6 @@ router.get('/logout', requireLogin, function(req, res) {
 
 
 module.exports = router;
+var rl = {};
+rl.requireLogin = requireLogin;
+module.exports.rl = rl;

@@ -1,13 +1,13 @@
 body {
-  margin-left: 60px;
+	margin-left: 60px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 /*div {
 	border: 2px black solid;
 }
-*/
-a {
+
+*/a {
 	text-decoration: none;
 	font-size: 25px;
 	color: #00B7FF;

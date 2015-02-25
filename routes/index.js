@@ -2,17 +2,17 @@ var express = require('express');
 var router = express.Router();
 var lib = require('../Src/lmsModule').init("./data/lms.db");
 var lmsLib = require('../Src/lmsLib');
-
+var rl = require('./users').rl;
 
 router.get(['/', '/login'], function(req, res) {
   res.render('index', { title: 'router' });
 });
 
-router.get('/userSearch', function(req, res) {
+router.get('/userSearch',rl.requireLogin, function(req, res) {
   	res.render('userSearch');
 });
 
-router.get('/search', function(req, res) {
+router.get('/search', rl.requireLogin, function(req, res) {
 	var book = req.query.name;
 	var userId = req.session.userID;
  	lib.getSearchedBooks(book,function(err,books){
@@ -20,11 +20,11 @@ router.get('/search', function(req, res) {
 	});
 });
 
-router.get('/adminSearch', function (req, res) {
+router.get('/adminSearch',rl.requireLogin, function (req, res) {
 	res.render('adminSearch');
 });
 
-router.post('/adminSearch', function (req, res) {
+router.post('/adminSearch',rl.requireLogin, function (req, res) {
 	var book = req.body.name;
  	lib.getSearchedBooks(book,function(err,books){
 		 var booksStatistics = books && lmsLib.countBooks(books);
@@ -32,7 +32,7 @@ router.post('/adminSearch', function (req, res) {
   	});
 });
 
-router.get('/borrow/:id', function(req, res) {
+router.get('/borrow/:id', rl.requireLogin, function(req, res) {
 	var userId = req.session.userID;
 	var bookId = req.params.id;
 	lib.borrowBook([bookId, userId], function(err, book){
@@ -40,11 +40,11 @@ router.get('/borrow/:id', function(req, res) {
 	});
 });
 
-router.get('/addBook', function (req, res) {
+router.get('/addBook', rl.requireLogin, function (req, res) {
 	res.render('addBook');
 });
 
-router.post('/addBook', function (req, res) {
+router.post('/addBook', rl.requireLogin, function (req, res) {
 	var data = {id: req.body.id, name: req.body.name};
 	lib.addBook(data, function (err, data){
 		if(err) res.render('addBook',{message: "Invalid book ID"}); 
@@ -52,14 +52,14 @@ router.post('/addBook', function (req, res) {
 	});
 });
 
-router.get('/return/:id',function(req,res){
+router.get('/return/:id',rl.requireLogin,function(req,res){
 	var bookId = req.params.id;
 	lib.returnBook(bookId, function(err, book){
 		res.redirect('/search?name='+book.book_name);
 	});
 });
 
-router.get('/bookHistory/:name',function(req,res){
+router.get('/bookHistory/:name', rl.requireLogin, function(req,res){
 	var bookName = req.params.name;
 	lib.getBookHistory(bookName,function(err,bookHistory){
 		res.render('bookHistory',{history:bookHistory,bookName:bookName});

@@ -5,19 +5,19 @@ block content
 
   div(align='right')
    a(href = "/dashboard/admin") Dashboard
-   |&nbsp;|&nbsp;
+   |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
-  br
+  hr
 
-  h2 ADD A USER
-  div
+  h2(align = "center") ADD A USER
+  
+  div(class = "add_form")
    form(action = "/addUser" method="POST")
-    input(type="text" name="u_id" placeholder = "Enter USER ID" required)
+    input(type="text" class = "inputBox" name="u_id" placeholder = "Enter USER ID" required)
     br
-    input(type="password" name="password" required placeholder = "Enter password here")
+    input(type="password" class = "inputBox" name="password" required placeholder = "Enter password here")
     br
-    input(type="submit" value="ADD USER" required)
-   div
-    p #{message}
-
+    input(type="submit" class = "register-button" value="ADD USER" required)
+   div(class = "error_message")
+    p(align = "center") #{message}
 
