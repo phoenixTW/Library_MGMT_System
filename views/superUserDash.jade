@@ -1,11 +1,12 @@
 extends layout
 
 block content
-  h1(align='center') WELCOME SUPER USER
-  
   div(align='right')
    a(href = "/logout") logout
   hr
+
+  h1(align='center') WELCOME SUPER USER
+  
   
   div(class = "add_form")
    form(action = "/addUser" method="POST")
