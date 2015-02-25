@@ -59,6 +59,7 @@ router.get("/dashboard/admin", requireLogin, function (req, res) {
 router.post('/addUser', requireLogin, function (req, res) {
     var newUserDetails = req.body;
     newUserDetails.password = bcrypt.hashSync(newUserDetails.password);
+    newUserDetails.u_id = req.body.u_id.toLowerCase();
 
     (req.session.user_type == 'S')
       ? newUserDetails.user_type = 'A'
