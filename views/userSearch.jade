@@ -4,32 +4,36 @@ block content
   h1(align='center') WELCOME USER
   div(align='right')
    a(href = "/logout") logout
-  h2= "USER SEARCH"
+  hr
 
-  form(action = "search")
-   input(type="text" name="name" required)
-   input(type="submit" value="SEARCH" required)
-  div
-   if(topics)
-    if(topics.length == 0)
-     | No results found
-    if(topics.length > 0)
-     table(class='search_table')
-      tr
-       th Book Id
-       th Name Of the Book
-       th Status
-      each topic in topics
+  h2(align = "center") USER SEARCH
+
+  div(align = "center")
+   form(action = "search")
+    input(type="text" class = "search_box" placeholder = "Enter the book name here....." name="name" required)
+    input(type="submit" class = "search-button" value="SEARCH" required)
+   div
+    if(topics)
+     if(topics.length == 0)
+      | No results found
+     if(topics.length > 0)
+      table(class='search_table')
        tr
-        td #{topic.id}
-        td #{topic.book_name}
-        td 
-         if(topic.available == 1)
-          form(action="borrow/#{topic.id}")
-           input(type = "submit" value = "BORROW")
-         if(userId == topic.takenBy)
-          form(action="return/#{topic.id}")
-           input(type = "submit" value = "RETURN")
-         if(topic.available == 0 && userId != topic.takenBy)
-          | Not Available
+        th Book Id
+        th Name Of the Book
+        th Status
+       div(class = "table_alignment")
+        each topic in topics
+         tr
+          td <font size="5"> #{topic.id} </font>
+          td <font size="5"> #{topic.book_name} </font>
+          td 
+           if(topic.available == 1)
+            form(action="borrow/#{topic.id}")
+             input(type = "submit" class = "action-button" value = "BORROW")
+           if(userId == topic.takenBy)
+            form(action="return/#{topic.id}")
+             input(type = "submit" class = "action-button" value = "RETURN")
+           if(topic.available == 0 && userId != topic.takenBy)
+            | Not Available
          
