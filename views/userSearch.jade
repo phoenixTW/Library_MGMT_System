@@ -10,26 +10,26 @@ block content
    input(type="text" name="name" required)
    input(type="submit" value="SEARCH" required)
   div
-   if(topics)
-    if(topics.length == 0)
+   if(books)
+    if(books.length == 0)
      | No results found
-    if(topics.length > 0)
+    if(books.length > 0)
      table(class='search_table')
       tr
        th Book Id
        th Name Of the Book
        th Status
-      each topic in topics
+      each book in books
        tr
-        td #{topic.id}
-        td #{topic.book_name}
+        td #{book.id}
+        td #{book.book_name}
         td 
-         if(topic.available == 1)
-          form(action="borrow/#{topic.id}")
+         if(book.available == 1)
+          form(action="borrow/#{book.id}")
            input(type = "submit" value = "BORROW")
-         if(userId == topic.takenBy)
-          form(action="return/#{topic.id}")
+         if(userId == book.takenBy)
+          form(action="return/#{book.id}")
            input(type = "submit" value = "RETURN")
-         if(topic.available == 0 && userId != topic.takenBy)
+         if(book.available == 0 && userId != book.takenBy)
           | Not Available
          
