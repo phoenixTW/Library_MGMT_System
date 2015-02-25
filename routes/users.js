@@ -72,16 +72,16 @@ router.post('/addUser', requireLogin, function (req, res) {
 
 var renderSuperUser = function (err, res) {
       err && 
-        res.render('superUserDash', {message: "Invalid ADMIN ID"});
+        res.render('superUserDash', {message: "Invalid ADMIN ID", isSuccess: 0});
       !err && 
-        res.render('superUserDash', {message: "New Admin added successfully"});
+        res.render('superUserDash', {message: "New Admin added successfully", isSuccess: 1});
 };
 
 var renderAdmin = function (err, res) {
       err && 
-        res.render('addUser', {message: "Invalid USER ID"});
+        res.render('addUser', {message: "Invalid USER ID", isSuccess: 0});
       !err && 
-        res.render('addUser', {message: "New USER added successfully"});
+        res.render('addUser', {message: "New USER added successfully", isSuccess: 1});
 };
 
 router.get('/logout', requireLogin, function(req, res) {

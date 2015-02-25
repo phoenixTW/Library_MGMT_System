@@ -1,13 +1,15 @@
 extends layout
 
 block content
-  h1(align='center') WELCOME ADMIN
+
 
   div(align='right')
    a(href = "/dashboard/admin") Dashboard
    |&nbsp;&nbsp;<font size="5">|</font>&nbsp;&nbsp;
    a(href = "/logout") logout
   hr
+    
+  h3(align='left') WELCOME ADMIN
 
   h2(align = "center") ADMIN SEARCH
 
@@ -33,5 +35,5 @@ block content
          tr
           td
            a(href = "/bookHistory/#{book.name}") #{book.name}
-          td <font size="5">#{book.available}</font>
-          td <font size="5">#{book.count}</font>
+          td <font size="4">#{book.available}</font>
+          td <font size="4">#{book.count}</font>

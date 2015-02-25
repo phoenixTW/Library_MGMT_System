@@ -15,5 +15,10 @@ block content
     input(type="password" class = "inputBox" name="password" required placeholder = "Enter password here")
     br
     input(type="submit" class = "register-button" value="ADD ADMIN" required)
-   div(class = "error_message")
-    p(align = "center") #{message}
+
+   if isSuccess
+    div(class = "success_message")
+     p(align = "center") #{message}
+   else
+    div(class = "error_message")
+     p(align = "center") #{message}
