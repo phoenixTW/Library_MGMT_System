@@ -1,2 +1,7 @@
 # Library_MGMT_System
-Short time project meant to use for STEP library
+
+## To run this project you need to have
+
+    - Node v0.10
+    - Bower
+
